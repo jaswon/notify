@@ -14,12 +14,13 @@ def isOpen():
   soup = Bs(urlopen(request), 'html.parser')
   return soup.body.contents[5].h2.strong.string != 'Registration opens soon'
 
+# check every 30 seconds, notify if true
 async def todo():
   await client.wait_until_ready()
   while not client.is_closed:
     if isOpen():
       await client.send_message(recipient, "REGISTRATION OPEN GOGOGOGO")
-    await asyncio.sleep(30) # task runs every 60 seconds
+    await asyncio.sleep(30)
 
 @client.event
 async def on_ready():
