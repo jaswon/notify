@@ -1,4 +1,4 @@
 creds.py
 .vscode
 *.pyc
-__pycache
+__pycache__
