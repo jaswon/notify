@@ -17,6 +17,7 @@ async def isOpen():
       return soup.body.contents[5].h2.strong.string != 'Registration opens soon'
   return false
 
+# check every 30 seconds, notify if true
 async def todo():
   await client.wait_until_ready()
   while not client.is_closed:
@@ -24,7 +25,7 @@ async def todo():
       await client.send_message(recipient, "REGISTRATION OPEN GOGOGOGO")
     else:
       print('[{:%Y-%m-%d %H:%M:%S}] - no change'.format(datetime.datetime.now()))
-    await asyncio.sleep(30) # task runs every 60 seconds
+    await asyncio.sleep(30)
 
 @client.event
 async def on_ready():
