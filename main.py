@@ -14,7 +14,11 @@ async def isOpen():
     if r.status == 200:
       res = await r.text()
       soup = Bs(res, 'html.parser')
-      return soup.body.contents[5].h2.strong.string != 'Registration opens soon'
+      try:
+        check = soup.body.contents[5].h2.strong.string 
+        return check is None or check != 'Registration opens soon'
+      except AttributeError:
+        return true
   return false
 
 # check every 30 seconds, notify if true
